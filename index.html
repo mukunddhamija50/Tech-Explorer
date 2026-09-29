@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Explorer – SIH26134</title>
+    <meta name="description" content="Tech Explorer bridges the gap between education and industry — live skill demand, job roles and personalized learning roadmaps.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">TE</div>
+            <span>Tech Explorer</span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="indexr.html">Skill Match</a>
+            <a href="#jobs">Jobs</a>
+            <a href="#insights">Insights</a>
+        </div>
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">SIH26134 • INDUSTRY SKILL PLATFORM</div>
+
+            <h1>Bridge the Gap Between <span>Skills & Industry</span></h1>
+
+            <p>
+                Discover the skills industries need, explore career opportunities,
+                and become job-ready — all in one place.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="exploreSkills()">Explore Skills →</button>
+                <button class="secondary-btn" onclick="exploreJobs()">Explore Jobs</button>
+                <a class="secondary-btn" href="indexr.html">Skill Match ↗</a>
+            </div>
+
+            <div class="hero-chart">
+                <div class="chart-header">
+                    <div>
+                        <small>INDUSTRY DEMAND</small>
+                        <h3>Most Requested Technology Skills</h3>
+                    </div>
+                    <span class="demo-badge">● LIVE DATA</span>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Python + SQL</span>
+                        <strong>26%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="26%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Gen AI / LLM + ML</span>
+                        <strong>24%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="24%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Java Full Stack</span>
+                        <strong>22%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="22%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Data Analytics</span>
+                        <strong>12%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="12%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Cyber Security</span>
+                        <strong>10%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="10%"></div>
+                    </div>
+                </div>
+
+                <div class="chart-row">
+                    <div class="chart-label">
+                        <span>Cloud</span>
+                        <strong>6%</strong>
+                    </div>
+                    <div class="chart-track">
+                        <div class="chart-bar" data-width="6%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Circle chart in hero free space -->
+        <div class="skill-gauge-card">
+            <div class="gauge-header">
+                <span>SKILL ALLOCATION</span>
+                <span class="gauge-status">● LIVE DATA</span>
+            </div>
+
+            <div class="gauge">
+                <canvas id="skillsChart" width="400" height="400"></canvas>
+            </div>
+
+            <div class="gauge-legend" id="gaugeLegend"></div>
+
+            <div class="gauge-footer">
+                <span class="status-dot"></span>
+                <span>Industry-ready skills matter</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section class="stats-section">
+        <div class="stat-box reveal">
+            <strong>1250+</strong>
+            <span>In-Demand Skills</span>
+        </div>
+        <div class="stat-box reveal">
+            <strong>850+</strong>
+            <span>Job Roles</span>
+        </div>
+        <div class="stat-box reveal">
+            <strong>3400+</strong>
+            <span>Learning Programs</span>
+        </div>
+         <div class="stat-box reveal">
+            <strong>50,000+</strong>
+            <span>Active Learners</span>
+        </div>
+        <div class="stat-box reveal">
+            <strong>1</strong>
+            <span>Career Platform</span>
+        </div>
+    </section>
+
+    <!-- ================= JOBS ================= -->
+    <section class="section jobs-section reveal" id="jobs">
+        <div class="section-heading">
+            <span class="section-tag">CAREER OPPORTUNITIES</span>
+            <h2>Explore Job Roles</h2>
+            <p>Discover job roles, the skills behind them, and the exact path to each career.</p>
+        </div>
+        <button></button>
+
+        <div class="program-search">
+            <select id="skillSelect">
+                <option value="">Select a Skill</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+                <option value="sql">SQL</option>
+                <option value="cloud">Cloud</option>
+                <option value="data analytics">Data Analytics</option>
+                <option value="machine learning">Machine Learning</option>
+                <option value="cyber security">Cyber Security</option>
+            </select>
+            <button class="primary-btn" onclick="findSkills()">Find Job Roles →</button>
+        </div>
+
+        <div id="jobsContainer" class="cards"></div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="section reveal" id="skills">
+        <div class="section-heading">
+            <span class="section-tag">EXPLORE SKILLS</span>
+            <h2>Skills That Industry Needs</h2>
+            <p>The technologies employers are asking for right now, served live from our data engine.</p>
+        </div>
+
+        <p id="message" class="connection-message">Connecting to Java backend...</p>
+        <div id="skillsContainer" class="cards"></div>
+    </section>
+
+    <!-- ================= INSIGHTS ================= -->
+    <section class="insights-section reveal" id="insights">
+        <div class="insights-container">
+            <div class="section-heading">
+                <span class="section-tag">CAREER INSIGHTS</span>
+                <h2>Skills Shaping the Tech Job Market</h2>
+                <p>Technology roles represented through recent industry hiring-trend data.</p>
+            </div>
+
+            <div class="insight-dashboard">
+                <div class="role-demand-card">
+                    <div class="role-card-header">
+                        <div>
+                            <span>ROLE DEMAND</span>
+                            <h3>Emerging Job Roles</h3>
+                        </div>
+                        <div class="live-indicator">
+                            <span></span>LIVE
+                        </div>
+                    </div>
+                    <div class="demand-item" data-value="26">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot blue"></span>
+                                <span>Python Developer</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill blue-fill" data-width="26%"></div>
+                        </div>
+                        <small>Python • SQL • FastAPI</small>
+                    </div>
+
+                    
+                    <div class="demand-item" data-value="24">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot violet"></span>
+                                <span>AI & ML Engineer</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill violet-fill" data-width="24%"></div>
+                        </div>
+                        <small>Python • Machine Learning • LLMs • Prompt Engineering • APIs</small>
+                    </div>
+
+                    <div class="demand-item" data-value="22">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot purple"></span>
+                                <span>Full Stack Developer</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill purple-fill" data-width="22%"></div>
+                        </div>
+                        <small>Frontend • Backend • Database Management</small>
+                    </div>
+
+                    
+
+
+                    <div class="demand-item" data-value="12">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot orange"></span>
+                                <span>Data Analyst</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill orange-fill" data-width="12%"></div>
+                        </div>
+                        <small>SQL • Data Analytics</small>
+                    </div>
+
+                    <div class="demand-item" data-value="10">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot orange"></span>
+                                <span>Cyber Security</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill orange-fill" data-width="10%"></div>
+                        </div>
+                        <small>Networking • Operating Systems • Linux</small>
+                    </div>
+
+                    <div class="demand-item" data-value="6">
+                        <div class="demand-top">
+                            <div class="role-name">
+                                <span class="role-dot sky"></span>
+                                <span>Cloud Engineer</span>
+                            </div>
+                            <strong><span class="counter">0</span>%</strong>
+                        </div>
+                        <div class="demand-track">
+                            <div class="demand-fill sky-fill" data-width="6%"></div>
+                        </div>
+                        <small>Cloud • Linux • AWS • Networking</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-note">
+                <strong>Note:</strong> These percentages are indicative values from our industry dataset and should not be read as exact market shares.
+            </div>
+
+            <p class="source-text">LIVE VISUALIZATION • SIH26134</p>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">TE</div>
+                <strong>Tech Explorer</strong>
+            </div>
+            <p>⚛️ Quantumania ⚛️</p>
+            <span>SIH26134 • Bridging Education & Industry</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

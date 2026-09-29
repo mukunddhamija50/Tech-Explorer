@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Skill - Tech Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">TE</div>
+            <span>Tech Explorer</span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="indexr.html">Skill Match</a>
+            <a href="index.html#jobs">Jobs</a>
+            <a href="index.html#insights">Insights</a>
+        </div>
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </nav>
+
+    <main>
+        <section class="section project-section reveal" id="skill-map">
+            <div class="section-heading">
+                <span class="section-tag">PROJECT TECH EXPLORER</span>
+                <h1>Know your skill</h1>
+                <p>Measure your progress, improve your resume, and see the next skills for your target role.</p>
+            </div>
+
+            <div class="project-groups">
+                <div class="project-group">
+                    <div class="project-group-heading">
+                        <span class="project-icon">%</span>
+                        <div>
+                            <h3>Skill tests</h3>
+                            <p>See how much of each skill you have gained through your latest tests.</p>
+                        </div>
+                    </div>
+                    <div class="skill-progress-list">
+                        <div class="skill-progress-item"><div><strong>Python</strong><span>8/10 questions correct</span></div><b>80%</b><div class="skill-progress-track"><i style="width: 80%"></i></div></div>
+                        <div class="skill-progress-item"><div><strong>SQL</strong><span>7/10 questions correct</span></div><b>70%</b><div class="skill-progress-track"><i style="width: 70%"></i></div></div>
+                        <div class="skill-progress-item"><div><strong>REST APIs</strong><span>6/10 questions correct</span></div><b>60%</b><div class="skill-progress-track"><i style="width: 60%"></i></div></div>
+                    </div>
+                    <a class="project-api-link" href="indexr.html#tests">Take a skill test ↗</a>
+                </div>
+
+                <div class="project-group project-group-accent">
+                    <div class="project-group-heading">
+                        <span class="project-icon">CV</span>
+                        <div>
+                            <h3>Resume toolkit</h3>
+                            <p>Create an ATS-friendly resume and scan it for missing skills and improvements.</p>
+                        </div>
+                    </div>
+                    <div class="project-files">
+                        <button class="project-file" type="button" data-file="resume_maker.py" onclick="openProjectFile(this)"><strong>resume_maker.py</strong><span>ATS-friendly resume generation</span><b>↗</b></button>
+                        <button class="project-file" type="button" data-file="scanner.py" onclick="openProjectFile(this)"><strong>scanner.py</strong><span>Resume parsing and ATS scoring</span><b>↗</b></button>
+                    </div>
+                    <div class="project-action-row"><a class="project-api-link" href="indexr.html#maker">Open resume maker ↗</a><a class="project-api-link" href="indexr.html#scan">Scan your resume ↗</a></div>
+                </div>
+
+                <div class="project-group project-group-wide">
+                    <div class="project-group-heading">
+                        <span class="project-icon">JOB</span>
+                        <div>
+                            <h3>Job recommendations</h3>
+                            <p>Recommendations are ranked by how closely your current skills match each role.</p>
+                        </div>
+                    </div>
+                    <div class="recommendation-search">
+                        <input id="skillJobSearch" type="search" placeholder="Search by role or skill, e.g. Python">
+                        <button class="primary-btn" type="button" onclick="filterRecommendedJobs()">Search jobs</button>
+                    </div>
+                    <div class="recommendation-list">
+                        <div class="recommendation-card skill-job-card" data-search="python backend developer python sql rest apis"><div><strong>Python Backend Developer</strong><span>82% skill-based match · Python, SQL, REST APIs</span></div><a href="index.html#jobs" aria-label="Explore Python backend developer jobs">Explore ↗</a></div>
+                        <div class="recommendation-card skill-job-card" data-search="data analyst sql python data analytics"><div><strong>Data Analyst</strong><span>74% skill-based match · SQL, Python, Data Analytics</span></div><a href="index.html#jobs" aria-label="Explore data analyst jobs">Explore ↗</a></div>
+                        <div class="recommendation-card skill-job-card" data-search="ai ml engineer python machine learning apis"><div><strong>AI / ML Engineer</strong><span>61% skill-based match · Python, ML, APIs</span></div><a href="index.html#jobs" aria-label="Explore AI and ML engineer jobs">Explore ↗</a></div>
+                    </div>
+                    <p class="recommendation-empty" id="recommendationEmpty" hidden>No matching job recommendation found.</p>
+                </div>
+
+                <div class="project-group project-group-wide project-group-company">
+                    <div class="project-group-heading">
+                        <span class="project-icon">FIT</span>
+                        <div>
+                                    <h3>Company recommendations</h3>
+                                    <p>See the number of required skills, what you already have, and exactly what to learn next.</p>
+                        </div>
+                    </div>
+                    <div class="company-recommendation">
+                        <div class="company-heading"><strong>Razorpay</strong><span class="fit-badge">68% ready</span></div>
+                        <div class="company-skill-columns"><div><small>Required skills</small><span class="skill-chip required">Python</span><span class="skill-chip required">SQL</span><span class="skill-chip required">REST APIs</span><span class="skill-chip required">Docker</span></div><div><small>You have</small><span class="skill-chip owned">Python</span><span class="skill-chip owned">SQL</span><span class="skill-chip owned">REST APIs</span></div><div><small>Learn next</small><span class="skill-chip missing">Docker</span><span class="skill-chip missing">System Design</span></div></div>
+                    </div>
+                    <div class="company-recommendation">
+                        <div class="company-heading"><strong>Microsoft</strong><span class="fit-badge">54% ready</span></div>
+                        <div class="company-skill-columns"><div><small>Required skills</small><span class="skill-chip required">Python</span><span class="skill-chip required">Data Structures</span><span class="skill-chip required">Cloud</span><span class="skill-chip required">Testing</span></div><div><small>You have</small><span class="skill-chip owned">Python</span><span class="skill-chip owned">Testing</span></div><div><small>Learn next</small><span class="skill-chip missing">Data Structures</span><span class="skill-chip missing">Cloud</span></div></div>
+                    </div>
+                    <a class="project-api-link" href="indexr.html#match">Run company matching with your skills ↗</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle" aria-hidden="true">
+        <div class="project-modal-backdrop" onclick="closeProjectFile()"></div>
+        <div class="project-modal-panel">
+            <div class="project-modal-header">
+                <div>
+                    <span class="section-tag">FILE PREVIEW</span>
+                    <h2 id="projectModalTitle">Project file</h2>
+                </div>
+                <button class="project-modal-close" type="button" onclick="closeProjectFile()" aria-label="Close file preview">×</button>
+            </div>
+            <p class="project-modal-status" id="projectModalStatus">Loading file...</p>
+            <pre class="project-code"><code id="projectCode"></code></pre>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">TE</div>
+                <strong>Tech Explorer</strong>
+            </div>
+            <span>SIH26134 • Bridging Education &amp; Industry</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

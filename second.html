@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillMatch — Resume, Jobs & Skills</title>
+<link rel="stylesheet" href="styler.css">
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">Skill<span>Match</span></div>
+  <div class="tagline">AI resume maker &nbsp;•&nbsp; live jobs &nbsp;•&nbsp; company fit &nbsp;•&nbsp; skill tests</div>
+</header>
+
+<div id="skillsbar" class="card" style="padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+  <span class="muted">Your skills:</span>
+  <span id="myskills" class="muted"><i>none yet — scan your resume or pick below</i></span>
+  <button class="btn small ghost" onclick="go('scan')">Scan resume</button>
+  <button class="btn small ghost" onclick="showSkillPicker()">Add manually</button>
+</div>
+
+<nav>
+  <button data-tab="home" class="active" onclick="go('home')">🏠 Home</button>
+  <button data-tab="maker" onclick="go('maker')">📄 Resume Maker</button>
+  <button data-tab="scan" onclick="go('scan')">🔍 Resume Scanner</button>
+  <button data-tab="jobs" onclick="go('jobs')">⚡ Live Jobs</button>
+  <button data-tab="match" onclick="go('match')">🎯 Company Match</button>
+  <button data-tab="tests" onclick="go('tests')">✅ Skill Tests</button>
+</nav>
+
+<!-- ============================== HOME ============================== -->
+<section id="home" class="active">
+  <div class="card">
+    <h2>Know exactly where you stand — and what to do next</h2>
+    <p class="sub">Scan your resume, get matched with companies you're ready for today, and get a personalised roadmap for the ones you're not ready for yet.</p>
+    <div class="grid2">
+      <div class="stat"><div class="n">AI</div><div class="l">Resume maker + scanner with ATS score</div></div>
+      <div class="stat"><div class="n">Live</div><div class="l">Real-time job feed (Remotive API)</div></div>
+      <div class="stat"><div class="n">Fit %</div><div class="l">Company matching from your skill set</div></div>
+      <div class="stat"><div class="n">Roadmap</div><div class="l">Skill-gap plan with free resources</div></div>
+      <div class="stat"><div class="n">Tests</div><div class="l">MCQ + code questions, scored in %</div></div>
+      <div class="stat"><div class="n">API</div><div class="l">Every feature also exposed as REST <a class="link" href="/docs" target="_blank">/docs</a></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Quick start</h3>
+    <p class="muted">1. Scan your resume → 2. See which companies you fit → 3. Get the gap roadmap for a target company → 4. Take a skill test to prove (or measure) each skill → 5. Regenerate your resume with verified skills.</p>
+  </div>
+</section>
+
+<!-- ============================== RESUME MAKER ============================== -->
+<section id="maker">
+  <div class="card">
+    <h2>AI Resume Maker</h2>
+    <p class="sub">Fill your details — the engine rewrites weak phrasing, orders skills for your target role, mines extra text for skills, and gives improvement tips.</p>
+    <div class="row">
+      <div><label>Full name *</label><input id="m_name" placeholder="Mukund Dhamija"></div>
+      <div><label>Email</label><input id="m_email" placeholder="you@gmail.com"></div>
+      <div><label>Phone</label><input id="m_phone" placeholder="+91 98xxxxxx10"></div>
+    </div>
+    <label>Target role</label>
+    <select id="m_role">
+      <option>Backend Developer</option><option>Frontend Developer</option><option>Full Stack Developer</option>
+      <option>Data Analyst</option><option>Machine Learning Engineer</option><option>DevOps Engineer</option><option>Mobile Developer</option>
+    </select>
+    <label>Skills (comma separated)</label>
+    <input id="m_skills" placeholder="python, sql, docker">
+    <label>Work experience</label>
+    <div id="m_exp"></div>
+    <button class="btn small ghost" onclick="addExp()">+ Add experience</button>
+    <label>Projects</label>
+    <div id="m_proj"></div>
+    <button class="btn small ghost" onclick="addProj()">+ Add project</button>
+    <label>Education</label>
+    <div id="m_edu"></div>
+    <button class="btn small ghost" onclick="addEdu()">+ Add education</button>
+    <label>Anything else to mine for skills / achievements (raw text)</label>
+    <textarea id="m_extra" placeholder="Paste old resume, LinkedIn about section, hackathon wins…"></textarea>
+    <br><br><button class="btn" onclick="makeResume()">✨ Generate resume</button>
+  </div>
+  <div id="m_out"></div>
+</section>
+
+<!-- ============================== SCANNER ============================== -->
+<section id="scan">
+  <div class="card">
+    <h2>Resume Scanner</h2>
+    <p class="sub">Upload your PDF resume and the AI scanner will extract your skills, seniority, contact info and ATS-readiness fixes.</p>
+    <label for="s_file">Resume PDF</label>
+    <input id="s_file" type="file" accept="application/pdf,.pdf" onchange="showSelectedPdf()">
+    <p id="s_file_name" class="muted">No PDF selected.</p>
+    <br>
+    <button class="btn" onclick="scanResume()">🔍 Analyze PDF</button>
+  </div>
+  <div id="s_out"></div>
+</section>
+
+<!-- ============================== JOBS ============================== -->
+<section id="jobs">
+  <div class="card">
+    <h2>Live Job Feed <span id="src_badge" class="chip"></span></h2>
+    <p class="sub">Real-time listings from public job APIs (Remotive; Adzuna if keys are set). If live sources are unreachable, a curated company dataset is shown so matching still works.</p>
+    <div class="row">
+      <div style="flex:3"><input id="j_q" placeholder="Search: react, python, data engineer…"></div>
+      <div style="flex:0"><button class="btn" onclick="loadJobs()">Search</button></div>
+    </div>
+    <br><div id="j_out"><div class="gate">Click <b>Search</b> to fetch live jobs.</div></div>
+  </div>
+</section>
+
+<!-- ============================== MATCH ============================== -->
+<section id="match">
+  <div class="card">
+    <h2>Company Match & Skill Gap</h2>
+    <p class="sub">Companies ranked by fit % with your skills. "What do I need?" shows exactly which skills to develop, in what order, with free resources.</p>
+    <button class="btn" onclick="matchCompanies()">🎯 Match me with companies</button>
+  </div>
+  <div id="mt_out"></div>
+</section>
+
+<!-- ============================== TESTS ============================== -->
+<section id="tests">
+  <div class="card">
+    <h2>Skill Tests</h2>
+    <p class="sub">MCQ + code-output questions per skill. Get a % score, band and per-question explanations. 75%+ counts as verified.</p>
+    <div id="t_list"></div>
+  </div>
+  <div id="t_out"></div>
+</section>
+
+</div>
+<div id="toast"></div>
+
+<script src="scriptr.js"></script>
+</body>
+</html>
